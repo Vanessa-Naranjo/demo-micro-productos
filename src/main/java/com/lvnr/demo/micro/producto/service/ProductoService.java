@@ -21,16 +21,36 @@ public class ProductoService {
 		this.productos.add(productoDto);
 	}
 
+	public void crearProductos(List<ProductoDto> productoDto) {
+		this.productos.addAll(productoDto);
+	}
+
 	public List<ProductoDto> consultarProductos() {
 		return productos;
 	}
 
 	public ProductoDto consultarProductoPorCodigo(String codigo) {
 		for (ProductoDto productoDto : productos) {
-			if(productoDto.getCodigo().equals(codigo)) {
+			if (productoDto.getCodigo().equals(codigo)) {
 				return productoDto;
 			}
-		}return null;
+		}
+		return null;
 	}
 
+	public String eliminarProductoPorCodigo(String codigo) {
+		ProductoDto productoDto = this.consultarProductoPorCodigo(codigo);
+		if (codigo == null) {
+			return "El producto no existe: " + codigo;
+		}
+		this.productos.remove(productoDto);
+
+		return "El producto ha sido eliminado";
+	}
+
+	public ProductoDto actualizarProducto(String codigo, ProductoDto productoDto) {
+		this.eliminarProductoPorCodigo(codigo);
+		productos.add(productoDto);
+		return productoDto;
+	}
 }
