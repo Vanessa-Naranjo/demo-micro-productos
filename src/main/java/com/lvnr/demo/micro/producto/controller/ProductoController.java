@@ -47,7 +47,7 @@ public class ProductoController {
 		return productoService.eliminarProductoPorCodigo(codigo);
 	}
 
-	@PutMapping ("/{codigo}")
+	@PutMapping("/{codigo}")
 	public ProductoDto actualizarProducto(@PathVariable String codigo, @RequestBody ProductoDto productoDto) {
 		return productoService.actualizarProducto(codigo, productoDto);
 	}
