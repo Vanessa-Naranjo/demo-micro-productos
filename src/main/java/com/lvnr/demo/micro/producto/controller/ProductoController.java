@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvnr.demo.micro.producto.dto.ProductoDto;
+import com.lvnr.demo.micro.producto.entity.ProductoEntity;
 import com.lvnr.demo.micro.producto.service.ProductoService;
 
 @RestController
@@ -21,7 +22,7 @@ public class ProductoController {
 	private ProductoService productoService;
 
 	@PostMapping
-	public void crearProducto(@RequestBody ProductoDto productoDto) {
+	public void crearProducto(@RequestBody ProductoEntity productoDto) {
 		productoService.crearProducto(productoDto);
 	}
 

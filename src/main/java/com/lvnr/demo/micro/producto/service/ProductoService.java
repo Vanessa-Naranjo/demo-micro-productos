@@ -48,8 +48,8 @@ public class ProductoService {
 			ProductoDto productoDto = new ProductoDto();
 			productoDto.setId(productoEntity.getId());
 			productoDto.setCodigo(productoEntity.getCodigo());
-			productoDto.setNombreProducto(productoDto.getNombreProducto());
-			productoDto.setCantidad(productoDto.getCantidad());
+			productoDto.setNombreProducto(productoEntity.getNombreProducto());
+			productoDto.setCantidad(productoEntity.getCantidad());
 			productoDto.setValor(productoEntity.getValor());
 
 			productosDto.add(productoDto);
@@ -63,8 +63,8 @@ public class ProductoService {
 		ProductoDto productoDto = new ProductoDto();
 		productoDto.setId(productoEntity.getId());
 		productoDto.setCodigo(productoEntity.getCodigo());
-		productoDto.setNombreProducto(productoDto.getNombreProducto());
-		productoDto.setCantidad(productoDto.getCantidad());
+		productoDto.setNombreProducto(productoEntity.getNombreProducto());
+		productoDto.setCantidad(productoEntity.getCantidad());
 		productoDto.setValor(productoEntity.getValor());
 
 		return productoDto;
@@ -83,7 +83,7 @@ public class ProductoService {
 	}
 
 	public String eliminarproducto(Integer Id) {
-		ProductoEntity productoEntity = productoRepository.findById(Id).get();
+		ProductoEntity productoEntity = productoRepository.findById(Id).orElseGet(() -> null);
 		if (productoEntity != null) {
 			this.productoRepository.deleteById(Id);
 			return "El producto ha sido eliminada: " + Id;
