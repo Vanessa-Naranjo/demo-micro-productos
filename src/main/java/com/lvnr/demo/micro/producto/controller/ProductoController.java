@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvnr.demo.micro.producto.dto.ProductoDto;
@@ -22,14 +21,13 @@ public class ProductoController {
 	private ProductoService productoService;
 
 	@PostMapping
-	public void crearProducto(@RequestParam String codigo, @RequestParam String nombreProducto,
-			@RequestParam int cantidad, @RequestParam double valor) {
-		productoService.crearProducto(codigo, nombreProducto, cantidad, valor);
+	public void crearProducto(@RequestBody ProductoDto productoDto) {
+		productoService.crearProducto(productoDto);
 	}
 
 	@PostMapping("/crearproductos")
-	public void crearProductos(@RequestBody List<ProductoDto> productoDto) {
-		productoService.crearProductos(productoDto);
+	public void crearProductos(@RequestBody List<ProductoDto> productos) {
+		productoService.crearProductos(productos);
 	}
 
 	@GetMapping
@@ -37,18 +35,45 @@ public class ProductoController {
 		return productoService.consultarProductos();
 	}
 
-	@GetMapping("/consultarProductocodigo/{codigo}")
-	public ProductoDto consultarProductoPorCodigo(@PathVariable String codigo) {
-		return productoService.consultarProductoPorCodigo(codigo);
+	@GetMapping("/consultarproductoid/{Id}")
+	public ProductoDto consultarProductoId(@PathVariable Integer Id) {
+		return productoService.consultarProductoId(Id);
 	}
 
-	@DeleteMapping("/{codigo}")
-	public String eliminarProductoPorCodigo(@PathVariable String codigo) {
-		return productoService.eliminarProductoPorCodigo(codigo);
+	@PutMapping("/actualizarproducto/{Id}")
+	public ProductoDto actualizarproducto(@PathVariable Integer Id, @RequestBody ProductoDto productoDto) {
+		return productoService.actualizarproducto(Id, productoDto);
 	}
 
-	@PutMapping("/{codigo}")
-	public ProductoDto actualizarProducto(@PathVariable String codigo, @RequestBody ProductoDto productoDto) {
-		return productoService.actualizarProducto(codigo, productoDto);
+	@DeleteMapping("/eliminarproducto/{Id}")
+	public String eliminarproducto(@PathVariable Integer Id) {
+		return productoService.eliminarproducto(Id);
 	}
+
+	/*
+	 * @PostMapping public void crearProducto(@RequestParam String
+	 * codigo, @RequestParam String nombreProducto,
+	 * 
+	 * @RequestParam int cantidad, @RequestParam double valor) {
+	 * productoService.crearProducto(codigo, nombreProducto, cantidad, valor); }
+	 * 
+	 * @PostMapping("/crearproductos") public void crearProductos(@RequestBody
+	 * List<ProductoDto> productoDto) { productoService.crearProductos(productoDto);
+	 * }
+	 * 
+	 * @GetMapping public List<ProductoDto> consultarProductos() { return
+	 * productoService.consultarProductos(); }
+	 * 
+	 * @GetMapping("/consultarProductocodigo/{codigo}") public ProductoDto
+	 * consultarProductoPorCodigo(@PathVariable String codigo) { return
+	 * productoService.consultarProductoPorCodigo(codigo); }
+	 * 
+	 * @DeleteMapping("/{codigo}") public String
+	 * eliminarProductoPorCodigo(@PathVariable String codigo) { return
+	 * productoService.eliminarProductoPorCodigo(codigo); }
+	 * 
+	 * @PutMapping("/{codigo}") public ProductoDto actualizarProducto(@PathVariable
+	 * String codigo, @RequestBody ProductoDto productoDto) { return
+	 * productoService.actualizarProducto(codigo, productoDto); }
+	 */
 }
