@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvnr.demo.micro.producto.dto.ProductoDto;
-import com.lvnr.demo.micro.producto.entity.ProductoEntity;
 import com.lvnr.demo.micro.producto.service.ProductoService;
 
 @RestController
@@ -22,7 +21,7 @@ public class ProductoController {
 	private ProductoService productoService;
 
 	@PostMapping
-	public void crearProducto(@RequestBody ProductoEntity productoDto) {
+	public void crearProducto(ProductoDto productoDto) {
 		productoService.crearProducto(productoDto);
 	}
 
@@ -51,30 +50,4 @@ public class ProductoController {
 		return productoService.eliminarproducto(Id);
 	}
 
-	/*
-	 * @PostMapping public void crearProducto(@RequestParam String
-	 * codigo, @RequestParam String nombreProducto,
-	 * 
-	 * @RequestParam int cantidad, @RequestParam double valor) {
-	 * productoService.crearProducto(codigo, nombreProducto, cantidad, valor); }
-	 * 
-	 * @PostMapping("/crearproductos") public void crearProductos(@RequestBody
-	 * List<ProductoDto> productoDto) { productoService.crearProductos(productoDto);
-	 * }
-	 * 
-	 * @GetMapping public List<ProductoDto> consultarProductos() { return
-	 * productoService.consultarProductos(); }
-	 * 
-	 * @GetMapping("/consultarProductocodigo/{codigo}") public ProductoDto
-	 * consultarProductoPorCodigo(@PathVariable String codigo) { return
-	 * productoService.consultarProductoPorCodigo(codigo); }
-	 * 
-	 * @DeleteMapping("/{codigo}") public String
-	 * eliminarProductoPorCodigo(@PathVariable String codigo) { return
-	 * productoService.eliminarProductoPorCodigo(codigo); }
-	 * 
-	 * @PutMapping("/{codigo}") public ProductoDto actualizarProducto(@PathVariable
-	 * String codigo, @RequestBody ProductoDto productoDto) { return
-	 * productoService.actualizarProducto(codigo, productoDto); }
-	 */
 }
